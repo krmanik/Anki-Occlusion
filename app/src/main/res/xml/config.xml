@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.infinyte7.ankiimageocclusion" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"
+<widget id="io.infinyte7.ankiimageocclusion" version="1.3.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <feature name="AnkiDroidCardAdd">
         <param name="android-package" value="cordova.plugin.ankiaddcard.AnkiDroidCardAdd.AnkiDroidCardAdd" />
@@ -42,6 +42,7 @@
     <allow-intent href="geo:*" />
     <config-file parent="/*" target="AndroidManifest.xml">
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+        <uses-permission android:name="android.permission.INTERNET"/>
     </config-file>
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
