@@ -29,6 +29,7 @@ public class AnkiDroidCardAdd extends CordovaPlugin {
     Context context;
 
     private AnkiDroidHelper mAnkiDroid;
+    private String deckName;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -184,21 +185,14 @@ public class AnkiDroidCardAdd extends CordovaPlugin {
 
         context = this.cordova.getActivity().getApplicationContext();
 
-        Long deckId = getDeckId();
-        Long modelId = getModelId();
-
-        if ((deckId == null) || (modelId == null)) {
-            // we had an API error, report failure and return
-            Toast.makeText(context, "AnkiDroid API Error", Toast.LENGTH_LONG).show();
-            return;
-        }
-
         final AddContentApi api = new AddContentApi(context);
 
         try {
             JSONObject jsonObject = new JSONObject(noteData);
 
             if (!(jsonObject == JSONObject.NULL)) {
+                deckName = jsonObject.optString("deckName", AnkiDroidConfig.DECK_NAME);
+
                 String noteId = jsonObject.optString("noteId", "");
                 String header  = jsonObject.optString("header", "");
 
@@ -218,6 +212,15 @@ public class AnkiDroidCardAdd extends CordovaPlugin {
 
                 String[] cardData = {noteId, header, origImgSvg, quesImgSvg, footer, remarks, sources, extra1, extra2, ansImgSvg, origImg};
 
+                Long deckId = getDeckId();
+                Long modelId = getModelId();
+
+                if ((deckId == null) || (modelId == null)) {
+                    // we had an API error, report failure and return
+                    Toast.makeText(context, "AnkiDroid API Error", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 api.addNote(modelId, deckId, cardData, null);
                 //Toast.makeText(context, "Card Added", Toast.LENGTH_SHORT).show();
                 callbackContext.success("Card added");
@@ -231,11 +234,18 @@ public class AnkiDroidCardAdd extends CordovaPlugin {
     private Long getDeckId() {
         mAnkiDroid = new AnkiDroidHelper(context);
 
-        Long did = mAnkiDroid.findDeckIdByName(AnkiDroidConfig.DECK_NAME);
+//        Long did = mAnkiDroid.findDeckIdByName(AnkiDroidConfig.DECK_NAME);
+//        if (did == null) {
+//            did = mAnkiDroid.getApi().addNewDeck(AnkiDroidConfig.DECK_NAME);
+//            mAnkiDroid.storeDeckReference(AnkiDroidConfig.DECK_NAME, did);
+//        }
+
+        Long did = mAnkiDroid.findDeckIdByName(deckName);
         if (did == null) {
-            did = mAnkiDroid.getApi().addNewDeck(AnkiDroidConfig.DECK_NAME);
-            mAnkiDroid.storeDeckReference(AnkiDroidConfig.DECK_NAME, did);
+            did = mAnkiDroid.getApi().addNewDeck(deckName);
+            mAnkiDroid.storeDeckReference(deckName, did);
         }
+
         return did;
     }
 

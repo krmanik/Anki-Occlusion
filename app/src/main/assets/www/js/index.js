@@ -787,6 +787,9 @@ function settings() {
 
     textColor = document.getElementById("textColor").value;
     localStorage.setItem("textColor", textColor);
+
+    deckName = document.getElementById("deckName").value;
+    localStorage.setItem("deckName", deckName);
 }
 
 function resetSettings() {
@@ -795,6 +798,7 @@ function resetSettings() {
     textColor = "#303942";
     textSize = 30;
     storageSvg = "AnkiDroid/collection.media/";
+    deckName = "Anki Image Occlusion";
 
     document.getElementById("OColor").value = originalColor;
     localStorage.setItem("originalColor", originalColor);
@@ -810,6 +814,9 @@ function resetSettings() {
 
     document.getElementById("textColor").value = textColor;
     localStorage.setItem("textColor", textColor);
+
+    deckName = document.getElementById("deckName").value;
+    localStorage.setItem("deckName", deckName);
 }
 
 window.onbeforeunload = function () {
@@ -822,6 +829,7 @@ var originalColor = "#FDD835";
 var textColor = "#303942";
 var textSize = 30;
 var storageSvg = "AnkiDroid/collection.media/";
+var deckName = "Anki Image Occlusion";
 
 window.onload = function () {
     get_local_file("common.html");
@@ -855,11 +863,16 @@ window.onload = function () {
         textSize = localStorage.getItem("textSize");
     }
 
+    if (localStorage.getItem("deckName") != null) {
+        deckName = localStorage.getItem("deckName");
+    }
+
     document.getElementById("QColor").value = questionColor;
     document.getElementById("OColor").value = originalColor;
     document.getElementById("svgDownloadSt").value = storageSvg;
     document.getElementById("textColor").value = textColor;
     document.getElementById("textSize").value = textSize;
+    document.getElementById("deckName").value = deckName;
 
 }
 
@@ -980,8 +993,9 @@ function success(result) {
 var card_added_num = 1;
 function addCardToAnkiDroid(cardData) {
     //console.log(cardData);
-    // noteId, noteHeader, origImgSVG, quesImgSVG, noteFooter, noteRemarks, noteSources, noteExtra1, noteExtra2, ansImgSVG, origFile
+    //deck name, noteId, noteHeader, origImgSVG, quesImgSVG, noteFooter, noteRemarks, noteSources, noteExtra1, noteExtra2, ansImgSVG, origFile
     var note = {
+        "deckName": deckName,
         "noteId": cardData[0],
         "header": cardData[1],
 
@@ -1206,23 +1220,4 @@ function selectPolygon(e) {
         document.getElementById("drawPolygonId").style.color = "#2196f3";
         document.getElementById("drawTextBoxId").style.color = "#fdd835";
     }
-}
-
-function alertAppUpdate() {
-    var req = new XMLHttpRequest(); 
-    
-    req.responseType = 'json';
-    req.open('GET', "https://raw.githubusercontent.com/infinyte7/image-occlusion-in-browser/master/app-version.json", true);
-    req.onload = function () {
-        var jsonResponse = req.response;
-
-        console.log(jsonResponse);
-
-        if (jsonResponse['android'] > app_version) {
-            showSnackbar("Update available. Version " + jsonResponse['android']);
-        } else {
-            showSnackbar("Update unavailable.");
-        }
-    };
-    req.send(null);
 }
