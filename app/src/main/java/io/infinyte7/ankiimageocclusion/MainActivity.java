@@ -71,8 +71,8 @@ public class MainActivity extends CordovaActivity
 
     /* https://stackoverflow.com/questions/42275906/how-to-ask-runtime-permissions-for-camera-in-android-runtime-storage-permissio */
     private boolean checkPermission() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, AddContentApi.READ_WRITE_PERMISSION) != PackageManager.PERMISSION_GRANTED) {
+        if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                || (ContextCompat.checkSelfPermission(this, AddContentApi.READ_WRITE_PERMISSION) != PackageManager.PERMISSION_GRANTED)) {
             // Permission is not granted
             return false;
         }
@@ -90,7 +90,7 @@ public class MainActivity extends CordovaActivity
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
                     loadUrl(launchUrl);
                 } else {
