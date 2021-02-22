@@ -59,14 +59,7 @@ This will copy selected image, generated svg and notes data to AnkiDroid app.
 <img src="images/new_design_demo.gif?raw=true" height="450"></img>
 
 ## More Images
-<div style="display:flex; overflow:scroll;">
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/1.png" height="400"></img>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/2.png" height="400"></img>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/3.png" height="400"></img>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/4.png" height="400"></img>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/5.png" height="400"></img>
-<img src="fastlane/metadata/android/en-US/images/phoneScreenshots/6.png" height="400"></img>
-</div>
+![](images/more_images.png)
 
 # How it made?
 The app made using [Apache Cordova](https://cordova.apache.org/) and [AnkiDroid API](https://github.com/ankidroid/Anki-Android/wiki/AnkiDroid-API) with ```HTML/CSS/JS```.
