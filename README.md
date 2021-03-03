@@ -40,6 +40,10 @@ To use this app. (This app is like addon for AnkiDroid app)
       Because this app add data to AnkiDroid app folder.
 
 ### 2. Install Anki Image Occlusion
+   Download and install Anki Image Occlusion app from F-Droid
+
+   https://f-droid.org/en/packages/io.infinyte7.ankiimageocclusion/
+
    Download and install Anki Image Occlusion app from release page.
 
    https://github.com/infinyte7/image-occlusion-in-browser/releases

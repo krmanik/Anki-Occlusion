@@ -218,7 +218,7 @@ textarea:focus {
   transition: 0.3s;
 }
 .sidenav-header {
-  height: 120px;
+  height: 160px;
   background: var(--side-nav-main-header-bg);
   vertical-align: middle;
   text-align: center;
@@ -238,8 +238,8 @@ textarea:focus {
   color: white;
   width: 100%;
   background: #0099ff;
-  height: 45px;
-  line-height: 7px;
+  height: 60px;
+  line-height: 20px;
 }
 .bottom-svg-div {
   position: absolute;
