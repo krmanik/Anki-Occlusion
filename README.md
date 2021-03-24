@@ -28,14 +28,14 @@ For desktop and iOS, web version of the app can be used. It create ready to impo
 - [Change color of masks](https://github.com/infinyte7/image-occlusion-in-browser/blob/master/demo/demo_change_color.gif)
 - [Undo / Redo feature](https://github.com/infinyte7/image-occlusion-in-browser/blob/master/demo/demo_undo_redo.gif)
 
-## Install
+# Install
 ### From F-Droid
 https://f-droid.org/en/packages/io.infinyte7.ankiimageocclusion
 
 ### From Release page
 https://github.com/infinyte7/Anki-Occlusion/releases
 
-## Usage
+# Usage
 
 To use this app. (This app is like addon for AnkiDroid app)
 ### 1. Install [AnkiDroid](https://github.com/ankidroid/Anki-Android)
