@@ -133,7 +133,7 @@ Author: Infinyte7 (Mani)
     </div>
 
     <div class="sidenav-version">
-      <div style="bottom: 20px; position: absolute; margin: auto; text-align: center;left: 10%;">Version 1.4.3</div>
+      <div style="bottom: 20px; position: absolute; margin: auto; text-align: center;left: 10%;">Version 1.4.4</div>
     </div>
 
     <!-- github logo -->
@@ -152,32 +152,26 @@ Author: Infinyte7 (Mani)
   </div>
   <!--main Side Nav -->
 
-  <!-- bottom -->
-  <nav class="nav">
-    <a id="drawBtn" href="#" class="nav__link" onclick="drawFigure();">
-      <i id="drawBtnIcon" class="material-icons nav__icon" style="color: #009688;">crop</i>
-      <span class="nav__text">Create</span>
-    </a>
-    <a id="enableDrawBtn" href="#" class="nav__link" onclick="enableDrawRect();">
-      <i id="enabledrawBtnIcon" class="material-icons nav__icon" style="color: #009688;">dashboard</i>
-      <span class="nav__text">Draw</span>
-    </a>
-    <a href="#" class="nav__link" onclick="removePolygon();">
-      <i class="material-icons nav__icon" style="color: #f44336;">delete</i>
-      <span class="nav__text">Delete</span>
-    </a>
-    <a href="#" class="nav__link" onclick="addNote();">
-      <i class="material-icons nav__icon" style="color: #5c6bc0;">post_add</i>
-      <span class="nav__text">Note</span>
-    </a>
+<!-- bottom -->
+<nav class="nav">
+  <a id="enableDrawBtn" href="#" class="nav__link" onclick="enableDrawing();">
+    <i id="enabledrawBtnIcon" class="material-icons nav__icon" style="color: #009688;">dashboard</i>
+    <span class="nav__text">Draw</span>
+  </a>
+  <a href="#" id="removeBtn" class="nav__link" onclick="removePolygon();">
+    <i id="removeBtnIcon" class="material-icons nav__icon" style="color: #f44336;">delete</i>
+    <span class="nav__text">Delete</span>
+  </a>
+  <a href="#" class="nav__link" onclick="addNote();">
+    <i class="material-icons nav__icon" style="color: #5c6bc0;">post_add</i>
+    <span class="nav__text">Note</span>
+  </a>
 
-    <a href="#" class="nav__link" onclick="moreTools();">
-      <i class="material-icons nav__icon" style="color: #0099ff;">more_horiz</i>
-      <span class="nav__text">More</span>
-    </a>
-
-
-  </nav>
+  <a href="#" class="nav__link" onclick="moreTools();">
+    <i class="material-icons nav__icon" style="color: #0099ff;">more_horiz</i>
+    <span class="nav__text">More</span>
+  </a>
+</nav>
 
 
   <!--more tools -->
