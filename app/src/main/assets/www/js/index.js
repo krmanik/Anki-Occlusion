@@ -118,8 +118,17 @@ function handler(evt) {
 
         // console.log("x:"+x);
         // console.log("y:"+y);
+        if (x1 > x2 && y1 < y2) {
+            drawFunction(x2, y1, w, h);
+        } else if (x1 > x2 && y1 > y2) {
+            drawFunction(x2, y2, w, h);
+        } else if (x1 < x2 && y1 > y2) {
+            drawFunction(x1, y2, w, h);
+        } else {
+            drawFunction(x1, y1, w, h);
+        }
 
-        drawFunction(x1, y1, w, h);
+        // drawFunction(x1, y1, w, h);
     }
 }
 
@@ -296,7 +305,19 @@ function deleteHandler(e) {
                         polygonStack.splice(l, 1);
                     }
                 }
+            } else if (element.parentElement.tagName == "g" && element.parentElement.getAttribute("data-type") == "combine") {
+                deleteElem = SVG.adopt(document.getElementById(element.parentElement.id));
 
+                undoStack.push(deleteElem);
+
+                deleteElem.selectize(false);
+                deleteElem.remove();
+
+                for (l = 0; l < polygonStack.length; l++) {
+                    if (element.parentElement.id == polygonStack[l]['node'].id) {
+                        polygonStack.splice(l, 1);
+                    }
+                }   
             }
         }
     } catch (e) {
