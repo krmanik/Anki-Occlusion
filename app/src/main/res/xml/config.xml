@@ -45,4 +45,7 @@
     </config-file>
     <allow-intent href="market:*" />
     <preference name="loglevel" value="DEBUG" />
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
 </widget>

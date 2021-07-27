@@ -72,7 +72,8 @@ public class MainActivity extends CordovaActivity
     /* https://stackoverflow.com/questions/42275906/how-to-ask-runtime-permissions-for-camera-in-android-runtime-storage-permissio */
     private boolean checkPermission() {
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-                || (ContextCompat.checkSelfPermission(this, AddContentApi.READ_WRITE_PERMISSION) != PackageManager.PERMISSION_GRANTED)) {
+                || (ContextCompat.checkSelfPermission(this, AddContentApi.READ_WRITE_PERMISSION) != PackageManager.PERMISSION_GRANTED)
+                || (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED)) {
             // Permission is not granted
             return false;
         }
@@ -82,7 +83,7 @@ public class MainActivity extends CordovaActivity
     private void requestPermission() {
 
         ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, AddContentApi.READ_WRITE_PERMISSION},
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, AddContentApi.READ_WRITE_PERMISSION, Manifest.permission.CAMERA},
                 PERMISSION_REQUEST_CODE);
     }
 
@@ -99,6 +100,8 @@ public class MainActivity extends CordovaActivity
                         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                                 != PackageManager.PERMISSION_GRANTED &&
                                 ContextCompat.checkSelfPermission(this, AddContentApi.READ_WRITE_PERMISSION)
+                                        != PackageManager.PERMISSION_GRANTED &&
+                                ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                                         != PackageManager.PERMISSION_GRANTED) {
                             showMessageOKCancel("You need to allow Storage and AnkiDroid read write permissions",
                                     new DialogInterface.OnClickListener() {
