@@ -24,6 +24,17 @@ SOFTWARE.
 
 var combineList = [];
 var combineColor = "#2196F3";
+
+// default event type
+var evnType = 'ontouchstart';
+// check if browser have touch or click event
+if ('ontouchstart' in window) {
+    // note 'on'
+    evnType = 'touchstart';
+} else {
+    evnType = 'click'
+}
+
 document.addEventListener('click', function (e) {
     //console.log(e.target.id);
     selectedElement = e.target.id;
@@ -52,40 +63,27 @@ document.addEventListener('click', function (e) {
             document.getElementById("merge-rect-btn").style.pointerEvents = "none";
             document.getElementById("merge-rect-btn").style.color = "#e0e0e0";
 
-            try {
-                if ((document.getElementById(selectedElement).tagName == "rect" && document.getElementById(selectedElement).parentElement.tagName == "svg")
-                    || document.getElementById(selectedElement).tagName == "ellipse" || document.getElementById(selectedElement).tagName == "polygon") {
-                    svgGroup = "added";
-
-                    var c = hexToRgb(originalColor);
-                    var color = "rgb(" + c.r + ", " + c.g + ", " + c.b + ")";
-                    if (document.getElementById(selectedElement).style.fill == "" || document.getElementById(selectedElement).style.fill == color) {
-                        document.getElementById(selectedElement).style.fill = combineColor; //questionColor;
-                        combineList.push(selectedElement);
-                    } else {
-
-                        // if again tap then remove from list
-                        for (i = 0; i < combineList.length; i++) {
-                            if (selectedElement == combineList[i]) {
-                                document.getElementById(selectedElement).style.fill = originalColor;
-                                combineList.splice(i, 1);
-                                break;
-                            }
-                        }
-                        if (combineList.length == 0) {
-                            svgGroup = "";
-                        }
-                    }
-                }
-
-            } catch (e) {
-                console.log(e);
+            // console.log("Evenetype" + evnType);
+            // add event listner to all child node of svg
+            for (i = 0; i < polygonStack.length; i++) {
+                // console.log(polygonStack[i]);
+                cElem = document.getElementById(polygonStack[i].id());
+                cElem.addEventListener(evnType, combineHandler, false);
             }
+
         } else {
             document.getElementById("group-done-btn").style.display = "none";
 
             document.getElementById("merge-rect-btn").style.pointerEvents = "unset";
             document.getElementById("merge-rect-btn").style.color = "#607d8b";
+
+            // console.log("Evenetype" + evnType);
+            // remove event listner to all child node of svg
+//            for (i = 0; i < polygonStack.length; i++) {
+//                // console.log(polygonStack[i]);
+//                cElem = document.getElementById(polygonStack[i].id());
+//                cElem.removeEventListener(evnType, combineHandler, false);
+//            }
 
             if (document.getElementById("add-note").style.height == "100%" || document.getElementById("settingsSideNav").style.height == "100%"
                 || document.getElementById("viewHelpSideNav").style.height == "100%" || document.getElementById("viewNoteSideNav").style.height == "100%") {
@@ -99,6 +97,39 @@ document.addEventListener('click', function (e) {
 
 }, false);
 
+
+function combineHandler(e) {
+    selectedElem = e.target.id;
+    try {
+        if ((document.getElementById(selectedElem).tagName == "rect" && document.getElementById(selectedElem).parentElement.tagName == "svg")
+            || document.getElementById(selectedElem).tagName == "ellipse" || document.getElementById(selectedElem).tagName == "polygon") {
+            svgGroup = "added";
+
+            var c = hexToRgb(originalColor);
+            var color = "rgb(" + c.r + ", " + c.g + ", " + c.b + ")";
+            if (document.getElementById(selectedElem).style.fill == "" || document.getElementById(selectedElem).style.fill == color) {
+                document.getElementById(selectedElem).style.fill = combineColor; //questionColor;
+                combineList.push(selectedElem);
+            } else {
+
+                // if again tap then remove from list
+                for (i = 0; i < combineList.length; i++) {
+                    if (selectedElem == combineList[i]) {
+                        document.getElementById(selectedElem).style.fill = originalColor;
+                        combineList.splice(i, 1);
+                        break;
+                    }
+                }
+                if (combineList.length == 0) {
+                    svgGroup = "";
+                }
+            }
+        }
+
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 function changeRectFillInsideG(gChild) {
     var gHTML = "";
@@ -202,16 +233,16 @@ async function createCombineCloze() {
                 if (oneTime) {
                     // origin mask
                     //console.log("orig " + origSVG);
-                    origFileName = "cordova-img-occ-orig-" + timeStamp;
+                    origFileName = "cordova-img-occ-orig-" + timeStamp + i;
                     saveSVG(origFileName, origSVG, imgHeight, imgWidth);
                     oneTime = false;
                 }
 
                 // Question Mask
-                var quesFileName = "cordova-img-occ-ques-" + timeStamp;
+                var quesFileName = "cordova-img-occ-ques-" + timeStamp + i;
 
                 // Answer mask
-                var ansFileName = "cordova-img-occ-ans-" + timeStamp;
+                var ansFileName = "cordova-img-occ-ans-" + timeStamp + i;
 
                 if (child[i].tagName == "rect") {
                     await saveSVG(quesFileName, svgQues, imgHeight, imgWidth);
@@ -228,7 +259,7 @@ async function createCombineCloze() {
                 // get all input note from form
                 getNoteFromForm();
 
-                var noteId = "cordova-img-occ-note-" + timeStamp;
+                var noteId = "cordova-img-occ-note-" + timeStamp + i;
 
                 csvLine = noteId +
                     "\t" + noteHeader +
