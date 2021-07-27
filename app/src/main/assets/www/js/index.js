@@ -356,6 +356,58 @@ function redoDraw() {
 
 var imgHeight;
 var imgWidth;
+
+function cameraTakePicture() {
+   scaleVar = 1.0;
+
+   polygonStack = [];
+   undoStack = [];
+
+   var timeStamp = new Date().getTime();
+   var imageCaptureName = "image-occlusion-capture-" + timeStamp + ".jpg"
+   document.getElementById("drawing").innerHTML = "<img id='uploadPreview' style='-webkit-transform-origin-x: 0%; -webkit-transform-origin-y: 0%;'/>";
+
+   navigator.camera.getPicture(onSuccess, onFail, {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      correctOrientation: true,
+      cameraDirection: Camera.Direction.BACK,
+   });
+
+   function onSuccess(imageData) {
+      var imgtag = document.getElementById("uploadPreview");
+      imgtag.src = "data:image/jpeg;base64," + imageData;
+      imgtag.title = imageCaptureName;
+      imgtag.type = "image/jpeg";
+      originalImageName = imgtag.title;
+      
+      const img = new Image();
+      img.src = "data:image/jpeg;base64," + imageData;
+      img.onload = function() {
+        imgWidth = img.naturalWidth;
+        imgHeight = img.naturalHeight;
+      
+        console.log('imgWidth: ', imgWidth);
+        console.log('imgHeight: ', imgHeight);
+        saveSelectedImageToAnkiDroid();
+
+        draw = SVG('drawing')
+              .height(imgHeight)
+              .width(imgWidth)
+              .id("SVG101")
+  
+        document.getElementById("SVG101").style.webkitTransformOriginX = "0%";
+        document.getElementById("SVG101").style.webkitTransformOriginY = "0%";
+  
+        resetZoom();
+      };
+   }
+
+   function onFail(message) {
+      showSnackbar("Failed: " + message);
+   }
+}
+
 function addImage() {
     scaleVar = 1.0;
 
