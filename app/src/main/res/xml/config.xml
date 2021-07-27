@@ -48,4 +48,8 @@
     <feature name="Camera">
         <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
+    <feature name="OpenWithPlugin">
+        <param name="android-package" value="cc.fovea.openwith.OpenWithPlugin" />
+    </feature>
+    <preference name="AndroidLaunchMode" value="singleTask" />
 </widget>
