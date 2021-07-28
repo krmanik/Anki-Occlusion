@@ -29,10 +29,9 @@ For desktop and iOS, web version of the app can be used. It create ready to impo
 - [Undo / Redo feature](https://github.com/infinyte7/image-occlusion-in-browser/blob/master/demo/demo_undo_redo.gif)
 
 **Experimental Features**
-- [Open images With this image](images/openwith.gif)
-- Add images using with Camera capture
-- [Crop selected images](images/cropdemo.gif)
-
+- Add images using Camera capture
+- [Crop selected images in editor window](images/cropdemo.gif)
+- [Add images using Share option from other apps](images/openwith.gif)
 
 # Install
 ### From F-Droid
