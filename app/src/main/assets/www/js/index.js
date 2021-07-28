@@ -404,7 +404,7 @@ function cameraTakePicture() {
    }
 
    function onFail(message) {
-      showSnackbar("Failed: " + message);
+      showSnackbar(message);
    }
 }
 

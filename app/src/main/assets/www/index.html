@@ -21,6 +21,10 @@ Author: Infinyte7 (Mani)
   <link href="css/index.css" rel=stylesheet type=text/css>
   <link href="css/svg.select.min.css" rel=stylesheet type=text/css>
 
+  <script src="js/cropImage.js"></script>
+  <link  href="css/cropper.css" rel="stylesheet">
+  <script src="js/cropperjs.js"></script>
+
   <title>
     Anki Image Occlusion
   </title>
@@ -58,6 +62,10 @@ Author: Infinyte7 (Mani)
       <div class="button">
         <label for="uploadImage"><i class="material-icons" style="color: #43a047;">add_photo_alternate</i></label>
         <input id="uploadImage" type="file" name="myPhoto" onchange="addImage();"></input>
+      </div>
+
+      <div id="cropImageBtnId" onclick="cropImage();" class="button">
+        <i id="cropImageBtnIcon" style="color: #039be5;" class="material-icons">crop_free</i>
       </div>
     </div>
 
